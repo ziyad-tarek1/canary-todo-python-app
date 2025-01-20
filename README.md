@@ -70,8 +70,8 @@ This project provides a robust cloud infrastructure solution built on AWS. The s
 
 #### 1. Clone the Repository
 ```bash
-git clone https://github.com/your-repository-name.git
-cd your-repository-name
+git clone https://github.com/ziyad-tarek1/canary-todo-python-app.git
+cd canary-todo-python-app
 ```
 
 #### 2. Initialize Terraform
@@ -103,7 +103,122 @@ kubectl apply -k ./k8s/
 ### 📂 Directory Structure
 
 ```bash
-
+.
+├── argocd
+│   └── application
+├── infrastructure
+│   ├── data
+│   │   ├── alb_data
+│   │   │   ├── podrole-autoscaler.json
+│   │   │   └── policy-autoscaler.json
+│   │   ├── argocd_data
+│   │   │   └── argocd.yaml
+│   │   ├── autoscaler_data
+│   │   │   ├── podrole-autoscaler.json
+│   │   │   └── policy-autoscaler.json
+│   │   ├── bastion_data
+│   │   │   ├── bastion-bootstrap.sh
+│   │   │   ├── bastion-provisioner.sh
+│   │   │   └── create_table.sql
+│   │   ├── elk_stack
+│   │   │   ├── Elasticsearch
+│   │   │   │   └── values.yml
+│   │   │   ├── Filebeat
+│   │   │   │   └── values.yml
+│   │   │   ├── Kibana
+│   │   │   │   └── values.yml
+│   │   │   └── Logstash
+│   │   │       └── values.yml
+│   │   ├── metrics_server_data
+│   │   │   └── metrics-server.yaml
+│   │   └── prometheus_data
+│   │       └── promethousvalues.yaml
+│   ├── module
+│   │   ├── alb
+│   │   │   ├── main.tf
+│   │   │   ├── output.tf
+│   │   │   └── variables.tf
+│   │   ├── app
+│   │   │   ├── main.tf
+│   │   │   ├── output.tf
+│   │   │   └── variables.tf
+│   │   ├── autoscaler
+│   │   │   ├── main.tf
+│   │   │   ├── output.tf
+│   │   │   └── variables.tf
+│   │   ├── bastion_host
+│   │   │   ├── main.tf
+│   │   │   ├── output.tf
+│   │   │   └── variables.tf
+│   │   ├── eks
+│   │   │   ├── main.tf
+│   │   │   ├── output.tf
+│   │   │   ├── policies
+│   │   │   │   ├── alb-policy.json
+│   │   │   │   ├── autoscaler-policy copy.json
+│   │   │   │   ├── autoscaler-policy.json
+│   │   │   │   ├── ec2-policy.json
+│   │   │   │   └── eks-policy.json
+│   │   │   └── variables.tf
+│   │   ├── elk
+│   │   │   ├── main.tf
+│   │   │   ├── output.tf
+│   │   │   ├── README.md
+│   │   │   └── variables.tf
+│   │   ├── istio_flagger
+│   │   │   ├── main.tf
+│   │   │   ├── output.tf
+│   │   │   └── variables.tf
+│   │   ├── promethous-and-grafana
+│   │   │   ├── main.tf
+│   │   │   ├── output.tf
+│   │   │   └── variables.tf
+│   │   ├── rds
+│   │   │   ├── create_table.sql
+│   │   │   ├── main.tf
+│   │   │   ├── output.tf
+│   │   │   └── variables.tf
+│   │   ├── template
+│   │   │   ├── main.tf
+│   │   │   ├── output.tf
+│   │   │   └── variables.tf
+│   │   └── vpc
+│   │       ├── main.tf
+│   │       ├── output.tf
+│   │       └── variables.tf
+│   ├── production
+│   │   ├── ecr.tf
+│   │   ├── main.tf
+│   │   ├── output.tf
+│   │   ├── providers.tf
+│   │   ├── terraform.tfstate
+│   │   ├── terraform.tfstate.backup
+│   │   ├── terraform.tfvars
+│   │   └── variables.tf
+│   └── test_module
+│       └── isto
+│           └── template
+│               ├── main.tf
+│               ├── output.tf
+│               └── variables.tf
+├── k8s
+│   ├── canary.yaml
+│   ├── deployment.yaml
+│   ├── ingress.yaml
+│   ├── manual_secrets.yaml
+│   ├── pod-monitor.yaml
+│   ├── rbac.yaml
+│   ├── rds-secret-provider
+│   └── service.yaml
+├── LICENSE.md
+├── README.md
+└── todo-app
+    ├── app.py
+    ├── Dockerfile
+    ├── requirements.txt
+    ├── templates
+    │   └── index.html
+    └── test_app.py
 ```
 
 ### 📖 Usage Cases

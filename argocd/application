@@ -9,7 +9,7 @@ spec:
     namespace: argocd
   project: default
   source:
-    repoURL: https://github.com/ziyad-tarek1/Full-infrastructure.git
+    repoURL: https://github.com/ziyad-tarek1/canary-todo-python-app.git
     path: k8s
     targetRevision: main
     directory:
@@ -18,17 +18,4 @@ spec:
     automated:
       prune: true
       selfHeal: true
-  applications:
-    - name: todo-app
-      namespace: default
-      destination:
-        server: https://kubernetes.default.svc
-        namespace: default
-      source:
-        repoURL: https://github.com/ziyad-tarek1/Full-infrastructure.git
-        path: todo-app/k8s
-        targetRevision: main
-      syncPolicy:
-        automated:
-          prune: true
-          selfHeal: true
+  
