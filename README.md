@@ -178,37 +178,28 @@ kubectl apply -k ./k8s/
 │   │   │   ├── main.tf
 │   │   │   ├── output.tf
 │   │   │   └── variables.tf
-│   │   ├── template
-│   │   │   ├── main.tf
-│   │   │   ├── output.tf
-│   │   │   └── variables.tf
 │   │   └── vpc
 │   │       ├── main.tf
 │   │       ├── output.tf
 │   │       └── variables.tf
-│   ├── production
-│   │   ├── ecr.tf
-│   │   ├── main.tf
-│   │   ├── output.tf
-│   │   ├── providers.tf
-│   │   ├── terraform.tfstate
-│   │   ├── terraform.tfstate.backup
-│   │   ├── terraform.tfvars
-│   │   └── variables.tf
-│   └── test_module
-│       └── isto
-│           └── template
-│               ├── main.tf
-│               ├── output.tf
-│               └── variables.tf
+│   └── production
+│       ├── ecr.tf
+│       ├── main.tf
+│       ├── output.tf
+│       ├── providers.tf
+│       ├── terraform.tfstate
+│       ├── terraform.tfstate.backup
+│       ├── terraform.tfvars
+│       └── variables.tf
 ├── k8s
 │   ├── canary.yaml
 │   ├── deployment.yaml
+│   ├── extrenal-secrets
+│   │   ├── manual_secrets-test.yaml
+│   │   ├── rbac.yaml
+│   │   └── rds-secret-provider
 │   ├── ingress.yaml
-│   ├── manual_secrets.yaml
 │   ├── pod-monitor.yaml
-│   ├── rbac.yaml
-│   ├── rds-secret-provider
 │   └── service.yaml
 ├── LICENSE.md
 ├── README.md
