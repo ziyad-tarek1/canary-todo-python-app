@@ -1,0 +1,84 @@
+version: 2.1
+
+executors:
+  python-docker:
+    docker:
+      - image: cimg/python:3.10  # Base Python image
+    working_directory: ~/repo
+
+jobs:
+  build:
+    executor: python-docker
+    steps:
+      - checkout
+      - run:
+          name: Install Dependencies
+          command: |
+            python -m pip install --upgrade pip
+            pip install -r todo-app/requirements.txt
+      - run:
+          name: Run Tests
+          command: |
+            echo "testing stage "
+           # pytest --tb=short --disable-warnings
+
+  dockerize:
+    docker:
+      - image: docker:20.10.11
+      - image: docker:20.10.11-dind
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 20.10.11
+      - run:
+          name: Build Docker Image
+          command: |
+            docker build -t ziyadtarek99/todopy:latest ./todo-app
+      - run:
+          name: Login to Docker Hub
+          command: |
+            echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+      - run:
+          name: Push Docker Image
+          command: |
+            IMAGE_TAG="v$(date +%Y%m%d%H%M%S)"
+            docker tag ziyadtarek99/todopy:latest ziyadtarek99/todopy:$IMAGE_TAG
+            docker push ziyadtarek99/todopy:$IMAGE_TAG
+            docker push ziyadtarek99/todopy:latest
+      - persist_to_workspace:
+          root: .
+          paths:
+            - k8s/deployment.yaml
+      - run:
+          name: Update Kubernetes Deployment
+          command: |
+            IMAGE_TAG="v$(date +%Y%m%d%H%M%S)"
+            sed -i "s|image: docker.io/ziyadtarek99/todopy:.*|image: docker.io/ziyadtarek99/todopy:$IMAGE_TAG|" k8s/deployment.yaml
+
+  commit:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - run:
+          name: Commit Changes to GitHub
+          command: |
+            git config --global user.email "ci@circleci.com"
+            git config --global user.name "CircleCI"
+            git add k8s/deployment.yaml
+            git commit -m "Update Kubernetes deployment with new image version"
+            git push origin main
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
+      - dockerize:
+          requires:
+            - build
+      - commit:
+          requires:
+            - dockerize

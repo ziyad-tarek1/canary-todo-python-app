@@ -1,0 +1,1 @@
+kubectl exec -it pod/kibana-kibana-8688b567b8-gl5pz -n elk-stack -- curl -k -u elastic:eIcAHyJt2u9qfzTQ https://elasticsearch-master:9200

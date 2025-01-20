@@ -1,0 +1,34 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app-of-apps
+  namespace: argocd
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  project: default
+  source:
+    repoURL: https://github.com/ziyad-tarek1/Full-infrastructure.git
+    path: k8s
+    targetRevision: main
+    directory:
+      recurse: true
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+  applications:
+    - name: todo-app
+      namespace: default
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: default
+      source:
+        repoURL: https://github.com/ziyad-tarek1/Full-infrastructure.git
+        path: todo-app/k8s
+        targetRevision: main
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
