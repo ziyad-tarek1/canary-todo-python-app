@@ -6,6 +6,9 @@ This project demonstrates a comprehensive AWS cloud infrastructure setup using T
 
 ## 📜 Project Overview
 
+![canary](https://github.com/user-attachments/assets/1589ce62-f23f-42e4-ad0d-21c291f16c0b)
+
+
 ### Key Components:
 - **Infrastructure as Code (IaC)**: 
   - A modularized Terraform setup to provision AWS resources such as VPCs, EKS clusters, RDS, EFS, ALBs, and more.
