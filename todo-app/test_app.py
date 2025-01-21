@@ -1,8 +1,7 @@
 import os
 import unittest
 from flask import Flask
-from your_flask_app import app  # Replace 'your_flask_app' with the name of your Python file without the .py extension
-
+from your_flask_app import app  
 class FlaskAppTests(unittest.TestCase):
     def setUp(self):
         # Set up the Flask test client
