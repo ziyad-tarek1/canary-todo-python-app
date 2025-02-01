@@ -187,8 +187,8 @@ module "elk_stack" {
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 module "canary" {
-    source = "."
-    istio_base_name              = "../module/istio_flagger"
+    source = "../module/istio_flagger"
+    istio_base_name              = "istiod"
     istio_base_repo              = "https://istio-release.storage.googleapis.com/charts"
     istio_base_chart             = "base"
     istiod_name                  = "istiod"
